@@ -9,8 +9,10 @@ import {
 
 const getAllList = async (req, res) => {
     const result = await listModel.find()
-    res.send('Go')
+    // res.setHeader('getall', result)
+    // res.send(result)
     res.status(200).json(result)
+    // res.end()
 }
 
 const getListByID = async (req, res) => {

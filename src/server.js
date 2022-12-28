@@ -1,6 +1,8 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import routes from './route'
+import cors from 'cors'
+
 
 const app = express()
 const bodyParser = require('body-parser')
@@ -24,14 +26,16 @@ app.listen(PORT, (err) => {
     console.log('Server listening on Port', PORT)
 })
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-with, Content-Type, Accept')
-  next()
-})
+// for error network when connect front-end
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json()) // ดูรายละเอียดของerror
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded())
 app.use(routes)
 
 //connect front

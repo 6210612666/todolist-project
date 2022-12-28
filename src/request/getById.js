@@ -3,8 +3,9 @@ import validate from './validateMessages'
 import customValidators from '../libs/customValidators'
 
 const validateFieldsList = [
-  param('id').custom(customValidators.isObjectID)
-    .withMessage(validate.isObjectID),
+  param('id').isInt()
+    .withMessage(validate.notInt),
+
 ]
 
 export default validateFieldsList

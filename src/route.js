@@ -4,11 +4,12 @@ import validator from './request'
 
 const router = express.Router()
 
+//สามารถมีพาราได้หล่ยคัวมันจะส่งข้อมูลต่อกันไป
 router
-  .get('/list', listController.getAllList)
-  .get('/list/:id', validator.getByID ,listController.getListByID)
-  .post('/list', validator.create ,listController.createList)
-  .put('/list/:id', validator.updateByID ,listController.updateListByID)
-  .delete('/list/:id', listController.deleteListByID)
+  .get('/get', listController.getAllList)
+  .get('/get/:id', validator.getByID ,listController.getListByID)
+  .post('/post/', validator.create ,listController.createList)
+  .put('/put/:id', validator.updateByID ,listController.updateListByID)
+  .delete('/delete/:id', listController.deleteListByID)
 
 export default router

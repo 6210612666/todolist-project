@@ -11,6 +11,7 @@ const getAllList = async (req, res) => {
     const result = await listModel.find()
     // res.setHeader('getall', result)
     // res.send(result)
+    console.log(result)
     res.status(200).json(result)
     // res.end()
 }
@@ -34,9 +35,10 @@ const deleteListByID = async (req, res) => {
 
 // id must unique
 const createList = async (req, res) => {
-    const { id, topic, completed } = req.body
+    const data = { id: req.body.id, topic: req.body.topic, completed: req.body.completed}
+    console.log(data)
     try {
-      await listModel.create({ id, topic, completed})
+      await listModel.create(data)
       res.status(201).json(SUCCESS_CREATED)
     } catch (error) {
       throw ERROR_CREATION
@@ -46,9 +48,11 @@ const createList = async (req, res) => {
 
 //internal input what it should used
 const updateListByID = async (req, res) => {
-    const { ID } = req.params.id
-    const { topic, completed_b } = req.body
-    const result = await listModel.findOneAndUpdate(ID, {topic: topic, completed: completed_b})
+    const { id } = req.params
+    // const ID  = {id: req.params.id}
+    // console.log("id" ,ID)
+    const { topic, completed } = req.body
+    const result = await listModel.findOneAndUpdate({id}, {topic, completed})
     res.status(200).json(result)
   }
 
